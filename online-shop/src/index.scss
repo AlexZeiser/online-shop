@@ -1,0 +1,17 @@
+$primary-color: #3498db;
+
+body {
+    background-color: $primary-color;
+}
+
+.product-container {
+    display: flex;
+    gap: 32px;
+    padding: 16px;
+}
+
+@media (max-width: 850px) {
+    .product-container {
+        flex-direction: column;
+    }
+}
