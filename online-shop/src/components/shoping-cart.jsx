@@ -36,6 +36,7 @@ class ShoppingCart extends Component {
                     <table>
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>Produkt</th>
                                 <th>Anzahl</th>
                                 <th>Einzelpreis (€)</th>
@@ -45,13 +46,16 @@ class ShoppingCart extends Component {
                         <tbody>
                             {this.props.items.map((item, index) => (
                                 <tr key={item.id || index}>
+                                    <td>
+                                        <img src={item.img} alt={item.name} style={{ width: '50px', height: '50px' }} />
+                                    </td>
                                     <td>{item.name}</td>
                                     <td>
                                         <button className='delete-icon' onClick={() => this.props.onRemoveItem(item.name)}>
                                             <img src="./../../assets/img/delete-icon.png" />
                                         </button>
                                         {item.amount}
-                                        <button className='add-icon' onClick={() => this.props.onAddItem(1, item.name, item.price)}>
+                                        <button className='add-icon' onClick={() => this.props.onAddItem(1, item.name, item.price, item.img)}>
                                             <img src="./../../assets/img/add-icon.png" />
                                         </button></td>
 
@@ -68,7 +72,7 @@ class ShoppingCart extends Component {
                             </div>
                         </div>
                         <div className='pay-div'>
-                            <button className='pay-div-button multi-color-c' onClick={this.props.pay}>Bezahlen <img className='pay-icon' src="./../../assets/img/pay-icon.png" /></button>
+                            <button className='pay-div-button ' onClick={this.props.pay}>Bezahlen <img className='pay-icon' src="./../../assets/img/pay-icon.png" /></button>
                         </div>
                     </div>
 

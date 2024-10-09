@@ -419,6 +419,8 @@ p {
             height: 40px;
             border: none;
             border-radius: 10px;
+            background-color: $mod-orange;
+            color: $white;
             box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 
             .pay-icon {
@@ -541,6 +543,20 @@ p {
 .adress-phone-email {
     color: inherit;
     text-decoration: none;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none; 
+    cursor: default;     
+    transition: opacity 0.5s ease-in-out; 
+}
+
+.visible {
+    opacity: 1;
+    pointer-events: auto;
+    cursor: pointer;    
+    transition: opacity 0.5s ease-in-out;
 }
 
 @media (min-width: 2300px) {

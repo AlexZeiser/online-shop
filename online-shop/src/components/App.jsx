@@ -62,84 +62,84 @@ class App extends Component {
             },
             {
                 id: 8,
-                name: "Beispiel Produkt",
+                name: "Produkt",
                 price: 0.00,
                 weight: "0 kg",
                 img: "/assets/img/default-fruits.jpg"
             },
             {
                 id: 9,
-                name: "Beispiel Produkt2",
+                name: "Produkt2",
                 price: 0.00,
                 weight: "0 kg",
                 img: "/assets/img/default-fruits.jpg"
             },
             {
                 id: 10,
-                name: "Beispiel Produkt3",
+                name: "Produkt3",
                 price: 0.00,
                 weight: "0 kg",
                 img: "/assets/img/default-fruits.jpg"
             },
             {
                 id: 11,
-                name: "Beispiel Produkt4",
+                name: "Produkt4",
                 price: 0.00,
                 weight: "0 kg",
                 img: "/assets/img/default-fruits.jpg"
             },
             {
                 id: 12,
-                name: "Beispiel Produkt5",
+                name: "Produkt5",
                 price: 0.00,
                 weight: "0 kg",
                 img: "/assets/img/default-fruits.jpg"
             },
             {
                 id: 13,
-                name: "Beispiel Produkt6",
+                name: "Produkt6",
                 price: 0.00,
                 weight: "0 kg",
                 img: "/assets/img/default-fruits.jpg"
             },
             {
                 id: 14,
-                name: "Beispiel Produkt7",
+                name: "Produkt7",
                 price: 0.00,
                 weight: "0 kg",
                 img: "/assets/img/default-fruits.jpg"
             },
             {
                 id: 15,
-                name: "Beispiel Produkt8",
+                name: "Produkt8",
                 price: 0.00,
                 weight: "0 kg",
                 img: "/assets/img/default-fruits.jpg"
             },
             {
                 id: 16,
-                name: "Beispiel Produkt9",
+                name: "Produkt9",
                 price: 0.00,
                 weight: "0 kg",
                 img: "/assets/img/default-fruits.jpg"
             },
             {
                 id: 17,
-                name: "Beispiel Produkt10",
+                name: "Produkt10",
                 price: 0.00,
                 weight: "0 kg",
                 img: "/assets/img/default-fruits.jpg"
             },
             {
                 id: 18,
-                name: "Beispiel Produkt11",
+                name: "Produkt11",
                 price: 0.00,
                 weight: "0 kg",
                 img: "/assets/img/default-fruits.jpg"
             },
             {
                 id: 19,
-                name: "Beispiel Produkt12",
+                name: "Produkt12",
                 price: 0.00,
                 weight: "0 kg",
                 img: "/assets/img/default-fruits.jpg"
@@ -216,13 +216,15 @@ class App extends Component {
                 name,
                 price,
                 totalPrice: (amount * price),
+                img
             });
         }
 
         this.setState({ items: currentItems }, () => {
             const addButton = document.getElementById('addButton');
             if (addButton) {
-                addButton.classList.remove('d-none');
+                addButton.classList.remove('hidden');
+                addButton.classList.add('visible');
             }
 
             this.flyItem(img);
@@ -243,18 +245,24 @@ class App extends Component {
 
             this.setState({ items: currentItems }, () => {
                 const addButton = document.getElementById('addButton');
-                const shoppingCart = document.getElementById('shopping-cart')
+                const shoppingCart = document.getElementById('shopping-cart');
+
                 if (currentItems.length < 1) {
                     this.setState({ cartVisible: false });
-                    addButton.classList.add('d-none');
-                    shoppingCart.classList.add('d-none');
+                    addButton.classList.remove('visible');
+                    addButton.classList.add('hidden');
+                    shoppingCart.classList.remove('visible');
+                    shoppingCart.classList.add('hidden');
                 } else {
-                    addButton.classList.remove('d-none');
-                    shoppingCart.classList.remove('d-none');
+                    addButton.classList.remove('hidden');
+                    addButton.classList.add('visible');
+                    shoppingCart.classList.remove('hidden');
+                    shoppingCart.classList.add('visible');
                 }
             });
         }
     }
+
 
     flyItem = (productImage) => {
         const flyingItem = document.createElement('img');
@@ -335,7 +343,13 @@ class App extends Component {
                                         />
                                     ))}
                                 </div>
-                                {this.state.cartVisible && <ShoppingCart items={this.state.items} onRemoveItem={this.removeItem} onAddItem={this.addItem} pay={this.pay} clearCart={this.clearCart} />}
+                                {this.state.cartVisible &&
+                                    <ShoppingCart
+                                        items={this.state.items}
+                                        onRemoveItem={this.removeItem}
+                                        onAddItem={this.addItem}
+                                        pay={this.pay}
+                                        clearCart={this.clearCart} />}
                             </div>
                         } />
 
