@@ -10,6 +10,7 @@ class App extends Component {
     state = {
         items: [],
         cartVisible: false,
+        searchTerm: '',
         products: [
             {
                 id: 1,
@@ -305,6 +306,11 @@ class App extends Component {
         }, 3000);
     }
 
+    handleSearch = (event) => {
+        const value = event.target.value.replace(',', '.');
+        this.setState({ searchTerm: value });
+    }
+
     toggleCartVisibility = () => {
         this.setState({ cartVisible: !this.state.cartVisible });
     }
@@ -318,6 +324,10 @@ class App extends Component {
     }
 
     render() {
+        const filteredProducts = this.state.products.filter(product =>
+            product.name.toLowerCase().includes(this.state.searchTerm.toLowerCase()) ||
+            product.price.toString().includes(this.state.searchTerm)
+        );
         return (
             <Router>
                 <React.Fragment>
@@ -328,11 +338,20 @@ class App extends Component {
                         totalPrice={this.getTotalPrice()}
                     />
 
+                    <div className="search-bar">
+                        <input
+                            type="text"
+                            placeholder="Finden Sie Ihr Produkt"
+                            value={this.state.searchTerm}
+                            onChange={this.handleSearch}
+                        />
+                    </div>
+
                     <Routes>
                         <Route path="/" element={
                             <div className='main-container'>
                                 <div className='product-container'>
-                                    {this.state.products.map(product => (
+                                    {filteredProducts.map(product => (
                                         <Product
                                             key={product.id}
                                             onAdd={() => this.addItem(1, product.name, product.price, product.img)}
