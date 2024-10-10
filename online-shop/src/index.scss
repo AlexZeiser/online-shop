@@ -198,6 +198,10 @@ td {
     padding: 10px;
     text-align: left;
     border-bottom: solid 1px $primary-color;
+
+    img {
+        border-radius: 10px;
+    }
 }
 
 thead {}
