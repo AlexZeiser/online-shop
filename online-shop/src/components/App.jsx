@@ -280,7 +280,7 @@ class App extends Component {
         flyingItem.style.borderRadius = '12px';
         flyingItem.style.left = startX + 'px';
         flyingItem.style.top = startY + 'px';
-       
+
         const rect = flyingItem.getBoundingClientRect();
         const x = window.innerWidth - rect.width - 80;
         const y = 40;
@@ -317,7 +317,7 @@ class App extends Component {
         const payMessage = document.getElementById('payMessage');
 
         this.clearCart();
-        payMessage.classList.remove('d-none','hidden');
+        payMessage.classList.remove('d-none', 'hidden');
         payMessage.classList.add('visible');
 
         setTimeout(() => {
@@ -358,18 +358,17 @@ class App extends Component {
                         totalPrice={this.getTotalPrice()}
                     />
 
-                    <div className="search-bar">
-                        <input
-                            type="text"
-                            placeholder="Finden Sie Ihr Produkt"
-                            value={this.state.searchTerm}
-                            onChange={this.handleSearch}
-                        />
-                    </div>
-
                     <Routes>
                         <Route path="/" element={
                             <div className='main-container'>
+                                <div className="search-bar">
+                                    <input
+                                        type="text"
+                                        placeholder="Finden Sie Ihr Produkt"
+                                        value={this.state.searchTerm}
+                                        onChange={this.handleSearch}
+                                    />
+                                </div>
                                 <div className='product-container'>
                                     {filteredProducts.map(product => (
                                         <Product
