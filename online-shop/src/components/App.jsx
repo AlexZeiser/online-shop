@@ -269,7 +269,9 @@ class App extends Component {
 
 
     flyItem = (productImage, startX, startY) => {
+        const addButton = document.getElementById('addButton');
         const flyingItem = document.createElement('img');
+
         flyingItem.src = productImage;
         flyingItem.className = 'fly-effect';
         document.body.appendChild(flyingItem);
@@ -278,16 +280,21 @@ class App extends Component {
         flyingItem.style.borderRadius = '12px';
         flyingItem.style.left = startX + 'px';
         flyingItem.style.top = startY + 'px';
-
+       
         const rect = flyingItem.getBoundingClientRect();
-        const x = window.innerWidth - rect.width - 20;
+        const x = window.innerWidth - rect.width - 80;
         const y = 40;
 
         flyingItem.style.transition = 'transform 1s ease, opacity 1s ease';
         flyingItem.style.transform = `translate(${x - startX}px, -${startY - y}px)`;
 
+        setTimeout(() => {
+            addButton.classList.remove('combined-effect');
+        }, 500);
+
         flyingItem.addEventListener('transitionend', () => {
             flyingItem.classList.add('hide');
+            addButton.classList.add('combined-effect');
             setTimeout(() => flyingItem.remove(), 600);
         });
     }
