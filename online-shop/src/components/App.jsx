@@ -204,7 +204,7 @@ class App extends Component {
         ]
     }
 
-    addItem = (amount, name, price, img) => {
+    addItem = (amount, name, price, img, event) => {
         let currentItems = [...this.state.items];
         let existingItem = currentItems.find(item => item.name === name);
 
@@ -221,6 +221,9 @@ class App extends Component {
             });
         }
 
+        const clickX = event.clientX;
+        const clickY = event.clientY;
+
         this.setState({ items: currentItems }, () => {
             const addButton = document.getElementById('addButton');
             if (addButton) {
@@ -228,7 +231,7 @@ class App extends Component {
                 addButton.classList.add('visible');
             }
 
-            this.flyItem(img);
+            this.flyItem(img, clickX, clickY);
         });
     }
 
@@ -265,18 +268,22 @@ class App extends Component {
     }
 
 
-    flyItem = (productImage) => {
+    flyItem = (productImage, startX, startY) => {
         const flyingItem = document.createElement('img');
         flyingItem.src = productImage;
         flyingItem.className = 'fly-effect';
         document.body.appendChild(flyingItem);
 
+        flyingItem.style.position = 'fixed';
+        flyingItem.style.left = startX + 'px';
+        flyingItem.style.top = startY + 'px';
+
         const rect = flyingItem.getBoundingClientRect();
-        const x = window.innerWidth - rect.width - 40;
-        const y = 10;
+        const x = window.innerWidth - rect.width - 20;
+        const y = 40;
 
         flyingItem.style.transition = 'transform 1s ease, opacity 1s ease';
-        flyingItem.style.transform = `translate(${x - rect.left}px, ${y - rect.top}px)`;
+        flyingItem.style.transform = `translate(${x - startX}px, -${startY - y}px)`;
 
         flyingItem.addEventListener('transitionend', () => {
             flyingItem.classList.add('hide');
@@ -284,25 +291,30 @@ class App extends Component {
         });
     }
 
+
     clearCart = () => {
         const addButton = document.getElementById('addButton');
         const shoppingCart = document.getElementById('shopping-cart');
 
-        this.setState({ items: [] });
-        this.setState({ cartVisible: false });
+        this.setState({ items: [], cartVisible: false });
 
-        shoppingCart.classList.add('d-none');
-        addButton.classList.add('d-none');
+        shoppingCart.classList.remove('visible');
+        shoppingCart.classList.add('hidden');
+
+        addButton.classList.remove('visible');
+        addButton.classList.add('hidden');
     }
 
     pay = () => {
         const payMessage = document.getElementById('payMessage');
 
         this.clearCart();
+        payMessage.classList.remove('hidden');
+        payMessage.classList.add('visible');
 
-        payMessage.classList.remove('d-none');
         setTimeout(() => {
-            payMessage.classList.add('d-none');
+            payMessage.classList.remove('visible');
+            payMessage.classList.add('hidden');
         }, 3000);
     }
 
@@ -354,7 +366,7 @@ class App extends Component {
                                     {filteredProducts.map(product => (
                                         <Product
                                             key={product.id}
-                                            onAdd={() => this.addItem(1, product.name, product.price, product.img)}
+                                            onAdd={(event) => this.addItem(1, product.name, product.price, product.img, event)}
                                             title={product.name}
                                             price={product.price}
                                             img={product.img}
@@ -366,7 +378,8 @@ class App extends Component {
                                     <ShoppingCart
                                         items={this.state.items}
                                         onRemoveItem={this.removeItem}
-                                        onAddItem={this.addItem}
+                                        onAddItem={(amount, name, price, img, event) => this.addItem(amount, name, price, img, event)}
+
                                         pay={this.pay}
                                         clearCart={this.clearCart} />}
                             </div>

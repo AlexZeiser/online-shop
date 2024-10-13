@@ -55,7 +55,7 @@ class ShoppingCart extends Component {
                                             <img src="./../../assets/img/delete-icon.png" />
                                         </button>
                                         {item.amount}
-                                        <button className='add-icon' onClick={() => this.props.onAddItem(1, item.name, item.price, item.img)}>
+                                        <button className='add-icon' onClick={(event) => this.props.onAddItem(1, item.name, item.price, item.img, event)}>
                                             <img src="./../../assets/img/add-icon.png" />
                                         </button></td>
 

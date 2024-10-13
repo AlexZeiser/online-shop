@@ -13,7 +13,10 @@ class Product extends Component {
                         {this.props.price.toFixed(2).replace(".", ",")} € / {this.props.weight}
                     </p>
                     <div className='btn-div'>
-                        <button id='addToCart' onClick={this.props.onAdd} className="btn btn-primary">In den Warenkorb</button>
+                        <button id='addToCart' onClick={(event) => this.props.onAdd(event)} className="btn btn-primary">
+                            In den Warenkorb
+                        </button>
+
                     </div>
                 </div>
             </div>
