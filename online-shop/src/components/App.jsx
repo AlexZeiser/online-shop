@@ -275,6 +275,7 @@ class App extends Component {
         document.body.appendChild(flyingItem);
 
         flyingItem.style.position = 'fixed';
+        flyingItem.style.borderRadius = '12px';
         flyingItem.style.left = startX + 'px';
         flyingItem.style.top = startY + 'px';
 
