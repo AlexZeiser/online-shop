@@ -23,7 +23,7 @@ class Navbar extends Component {
                         <div className='cart-button-text'>Bestellung {this.props.cartVisible ? "verstecken" : "ansehen"}</div>
                         <div className='cart-button-price'>{this.props.totalPrice.replace(".", ",")}€</div>
                     </button>
-                    <div id='payMessage' className='d-none'>
+                    <div id='payMessage' className='hidden'>
                         <span>Bestellung abgeschlossen! Vielen Dank für Ihren Einkauf.</span>
                     </div>
                 </div>

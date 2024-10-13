@@ -310,7 +310,7 @@ class App extends Component {
         const payMessage = document.getElementById('payMessage');
 
         this.clearCart();
-        payMessage.classList.remove('hidden');
+        payMessage.classList.remove('d-none','hidden');
         payMessage.classList.add('visible');
 
         setTimeout(() => {

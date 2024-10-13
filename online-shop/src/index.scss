@@ -29,10 +29,20 @@ body {
     flex-direction: row;
 }
 
+.container-fluid{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
 .links-div {
     display: flex;
     align-items: center;
     gap: 12px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 
     .nav-links-div {
         display: flex;
@@ -221,6 +231,11 @@ thead {}
 }
 
 #addButton {
+    position: absolute;
+    right: 20px; 
+    top: 50%;   
+    transform: translateY(-50%);
+
     padding-left: 8px;
     padding-right: 8px;
     display: flex;
